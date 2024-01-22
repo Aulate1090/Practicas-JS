@@ -1,7 +1,7 @@
 const readline = require("readline");
-   
-function listas() {
-    // se importan recursos
+const { toASCII } = require("punycode");
+
+1// se importan recursos
      const rl = readline.createInterface({ input: process.stdin, output: process.stdout, terminal: false });
     //-------------------------------------------------------------------------------------------------------------------
     console.clear()
@@ -76,7 +76,6 @@ function listas() {
                 ciclo = ciclo + 1
             } else {
 
-                console.log(lista)
                 const rl = readline.createInterface({ input: process.stdin, output: process.stdout, terminal: false });
 
                 rl.question('Desea agregar mas datos a la lista?\nS/N: ', (Respuesta) => {
@@ -99,32 +98,32 @@ function listas() {
 
         function CrearLista() {
 
-            console.clear()
+console.clear()
 
-            const rl = readline.createInterface({ input: process.stdin, output: process.stdout, terminal: false });
-            rl.question(`Dijite el valor ${ciclo}: `, (fi2) => {
+const rl = readline.createInterface({ input: process.stdin, output: process.stdout, terminal: false });
+rl.question(`Dijite el valor ${ciclo}: `, (fi2) => {
 
-                fi2 = parseInt(fi2)
-                lista[contador] = fi2
-                contador = contador + 1
-                rl.close()
-                Ordenar(lista)
-                Iteraciones()
+    fi2 = parseInt(fi2)
+    lista[contador] = fi2
+    contador = contador + 1
+    rl.close()
+    Ordenar(lista)
+    Iteraciones()
 
-            });
+});
         };
 
         function Ordenar(ordenado) {
-            
+
             var cambio;
 
             do {
                 cambio = false;
-                
+
                 for (var i = 0; i < contador - 1; i++) {
-                  
+
                     if (ordenado[i] > ordenado[i + 1]) {
-                        
+
                         var temporal = ordenado[i];
                         ordenado[i] = ordenado[i + 1];
                         ordenado[i + 1] = temporal;
@@ -141,7 +140,7 @@ function listas() {
     };
 
     function Eliminar() {
-        
+
         console.clear()
         let validar
 
@@ -149,7 +148,7 @@ function listas() {
         rl.question('Por favor seleccione una accesion con la letra de la opcion.\n\nOpciones:\n a) Eliminar coincidencias\n b) Eliminar elemento repetido\n\nOpcion: ', (fe1) => {
 
             if(fe1 === 'a' || fe1 === 'A'){
-                
+
                 rl.close()
                 validar = parseInt(fe1)
                 CasoA()
@@ -159,7 +158,7 @@ function listas() {
 
 
             }else{
-                
+
                 rl.close()
                 Eliminar()
 
@@ -167,7 +166,7 @@ function listas() {
 
         });
 
-        
+
         function CasoA(){
             console.clear()
             const rl = readline.createInterface({input: process.stdin, output: process.stdout, terminal: false});
@@ -183,46 +182,46 @@ function listas() {
 
                 let limpiar = [ [], [] ]
                 let contador2 = 0
-               
+
                 do {
                     cambio = false;
-                
+
                     for (var i = 0; i < contador - 1; i++){
-                    
+
                         if (lista[i] == validar){
-                            
+
                             limpiar[0][i] = validar
                             lista[contador2] = limpiar[0][contador2]
                             contador2 += 1
                             cambio = true;
-    
+
                         } else {
-    
+
                             limpiar[1][i] = validar
                             lista[contador2] = limpiar[1][contador2]
                             contador2 += 1
                             cambio = true;
-    
+
                         };
                     };
 
                 }while(cambio){
-                    
+
                     menu()
 
                 }
-               
-                
-            };
-            
 
-            
+
+            };
+
+
+
         }
 
 
 
 
-        
+
 
 
     }
@@ -236,12 +235,3 @@ function listas() {
 
     // }
     };
-
-    
-
-}
-
-
-    //---------------------------------------------------------------------------------------------------------------------
-
-listas();
