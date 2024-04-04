@@ -1,5 +1,8 @@
 // se importan recursos
+const { relative } = require("path");
 const readline = require("readline");
+const readlineSync = require('readline-sync');
+
 //variable global para las funciones
 var lista = [];
 //Funcion principal
@@ -23,7 +26,8 @@ function menu() {
     } else if (respuesta === "b" || respuesta === "B") {
       console.clear();
       rl.close();
-      Eliminar1(lista);
+      lista = Eliminar(lista);
+      menu();
     } else if (respuesta === "c" || respuesta === "C") {
       console.clear();
       rl.close();
@@ -45,8 +49,6 @@ function menu() {
   });
 };
 
-//Funciones del menu
-
 //Ingreso de datos nuevos
 function Ingresar() {
   var lista_temp = []
@@ -63,7 +65,6 @@ function Ingresar() {
   });
 
 };
-
 
 //Combina las entradas de usuario.
 function combinar(o, t) {
@@ -95,7 +96,7 @@ function combinar(o, t) {
 
 };
 
-//Valida y ordena por numeros y letras
+//Valida, convierte y ordena por numeros y letras
 function ordenar(o) {
   var array = o
   var temporal
@@ -103,7 +104,7 @@ function ordenar(o) {
   var temporal2 = []
   var contador1 = 0
   var contador2 = 0
-  
+
   for (let i = 0; i < array.length; i++) {
 
     if (/^[0-9]+$/.test(array[i])) {
@@ -113,7 +114,7 @@ function ordenar(o) {
 
     } else {
 
-      temporal2[contador2] = array[i]
+      temporal2[contador2] = array[i].toString();
       contador2++
 
     }
@@ -158,34 +159,50 @@ function ordenar(o) {
 };
 
 //Elimina las similitudes en la lista
-function Eliminar1(o) {
+function Eliminar(o) {
+  console.log('llegue1 ', o);
+  let valor_eliminar
+  let lista_temp = []
 
-  var lista_temp = []
-  console.log(lista);
-  
-  const rl = readline.createInterface({ input: process.stdin, output: process.stdout, terminal: false, });
-  rl.question("Ingrese el valor a eliminar separados por una coma ',' sin espacios.\n\nValores: ", (n_valores) => {
+  const valor = readlineSync.question("Ingrese el valor a eliminar.\n\n" + "Lista actual: " + o + "\n\n\nValor a eliminar: ");
 
+  console.log('llegue2 ', o);
+  valor_eliminar = valor
 
-  });
+  if (/^[0-9]+$/.test(valor_eliminar)) {
+
+    valor_eliminar = parseInt(valor_eliminar)
+
+  } else {
+
+    valor_eliminar = valor_eliminar.toString()
+
+  };
+  let i2 = 0
+  for (let i = 0; i < o.length; i++) {
+
+    console.log("Lista valor eliminar: " + valor_eliminar + "\n\nLista o: " + o);
+
+    if (o[i] === valor_eliminar) {
+
+      console.log(lista_temp);
+
+    } else {
+
+      lista_temp[i2] = o[i];
+      i2++
+      console.log(lista_temp);
+
+    };
+
+  };
+
+  o = lista_temp
 
   return (o)
 
+
 };
-
-
-
-
-// console.log(lista)
-// rl.question('Desea agregar mas datos a la lista?\nS/N: ', (Respuesta) => {
-//     if (Respuesta === 'S' || Respuesta === 's') {
-//         rl.close()
-//         Ingresar()
-//     } else if (Respuesta === 'N' || Respuesta === 'n') {
-//         rl.close()
-//         menu()
-//     }
-// });
 
 listados();
 
