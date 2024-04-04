@@ -214,12 +214,6 @@ function Desordenar(o){
 
     };
 
-
-
-    console.log('lista1 ' + lista_temp1)
-    console.log('lista2 ' + lista_temp2)
-
-
   }
 
   lista_temp = combinar(lista_temp1,lista_temp2);
