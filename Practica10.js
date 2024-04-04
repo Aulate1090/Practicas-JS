@@ -31,7 +31,8 @@ function menu() {
     } else if (respuesta === "c" || respuesta === "C") {
       console.clear();
       rl.close();
-      Desordenar();
+      lista = Desordenar(lista);
+      menu();
     } else if (respuesta === "d" || respuesta === "D") {
       console.clear();
       console.log(lista);
@@ -160,47 +161,75 @@ function ordenar(o) {
 
 //Elimina las similitudes en la lista
 function Eliminar(o) {
-  console.log('llegue1 ', o);
   let valor_eliminar
   let lista_temp = []
 
   const valor = readlineSync.question("Ingrese el valor a eliminar.\n\n" + "Lista actual: " + o + "\n\n\nValor a eliminar: ");
-
-  console.log('llegue2 ', o);
   valor_eliminar = valor
 
   if (/^[0-9]+$/.test(valor_eliminar)) {
-
     valor_eliminar = parseInt(valor_eliminar)
-
   } else {
-
     valor_eliminar = valor_eliminar.toString()
-
   };
+
   let i2 = 0
   for (let i = 0; i < o.length; i++) {
 
-    console.log("Lista valor eliminar: " + valor_eliminar + "\n\nLista o: " + o);
-
     if (o[i] === valor_eliminar) {
 
-      console.log(lista_temp);
-
     } else {
-
       lista_temp[i2] = o[i];
       i2++
-      console.log(lista_temp);
-
     };
-
   };
 
   o = lista_temp
 
   return (o)
 
+
+};
+
+//Desordena la lista
+function Desordenar(o){
+  let lista_temp = []
+  let lista_temp1 = []
+  let lista_temp2 = []
+  let contador = 0
+  
+  for (let i=0; i < o.length; i++){
+
+
+    lista_temp1[contador] = o[i]
+    i++
+    
+    
+    if(i < o.length){
+
+      lista_temp2[contador] = o[i]
+      contador++
+
+    }else{
+
+    };
+
+
+
+    console.log('lista1 ' + lista_temp1)
+    console.log('lista2 ' + lista_temp2)
+
+
+  }
+
+  lista_temp = combinar(lista_temp1,lista_temp2);
+
+  console.log('lista ' + lista_temp)
+
+
+  o = lista_temp
+
+  return(o);
 
 };
 
